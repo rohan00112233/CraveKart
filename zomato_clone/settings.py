@@ -122,6 +122,6 @@ STATIC_URL = 'static/'
 AUTH_USER_MODEL = 'users.User'
 LOGIN_URL = '/users/login/'
 
-RAZORPAY_KEY_ID = 'rzp_test_Sq4jnjcTpwgzOu'
+RAZORPAY_KEY_ID = ''
 
-RAZORPAY_KEY_SECRET = 'XK5Yh7d6XUGpikRSJvht3aDF'
+RAZORPAY_KEY_SECRET = ''

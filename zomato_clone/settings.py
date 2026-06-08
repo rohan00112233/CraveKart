@@ -78,8 +78,12 @@ WSGI_APPLICATION = 'zomato_clone.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'cravekart_db',
+        'USER': 'root',
+        'PASSWORD': 'Milind@9321',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 

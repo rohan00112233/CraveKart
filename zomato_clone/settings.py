@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core',
     'users',
-    'rest_framework',
+    'rest_framework',  
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
@@ -78,12 +79,15 @@ WSGI_APPLICATION = 'zomato_clone.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'cravekart_db',
-        'USER': 'root',
-        'PASSWORD': 'Milind@9321',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'neondb',
+        'USER': 'neondb_owner',
+        'PASSWORD': 'npg_0wVRufZqgG7t',
+        'HOST': 'ep-shiny-boat-airsxm05-pooler.c-4.us-east-1.aws.neon.tech',
+        'PORT': '5432',
+        'OPTIONS': {
+            'sslmode': 'require',
+        },
     }
 }
 

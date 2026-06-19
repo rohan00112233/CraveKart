@@ -1,8 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Restaurant, Order, OrderItem
-import razorpay
-from django.conf import settings
+
+
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import RestaurantSerializer
@@ -157,10 +157,8 @@ def decrease_quantity(request, id):
 def payment_page(request):
 
     order = Order.objects.filter(
-
         user=request.user,
         is_completed=False
-
     ).first()
 
     total_price = 0
@@ -178,41 +176,18 @@ def payment_page(request):
 
     final_total = total_price + 40
 
-    client = razorpay.Client(
+    if request.method == "POST":
 
-        auth=(
+        order.is_completed = True
+        order.save()
 
-            settings.RAZORPAY_KEY_ID,
-            settings.RAZORPAY_KEY_SECRET
-
-        )
-
-    )
-
-    payment = client.order.create({
-
-        'amount': int(final_total * 100),
-
-        'currency': 'INR',
-
-        'payment_capture': '1'
-
-    })
+        return redirect('order_history')
 
     return render(request, 'payment.html', {
-
         'order': order,
-
         'total_price': total_price,
-
         'total_items': total_items,
-
-        'final_total': final_total,
-
-        'payment': payment,
-
-        'razorpay_key': settings.RAZORPAY_KEY_ID
-
+        'final_total': final_total
     })
 
 

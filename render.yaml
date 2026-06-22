@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: cravekart
+    env: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn zomato_clone.wsgi:application"

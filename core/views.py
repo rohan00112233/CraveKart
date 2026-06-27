@@ -39,13 +39,22 @@ from .models import Restaurant
 from django.db import connection
 
 def home(request):
-    return HttpResponse(
-        f"""
-Database: {connection.settings_dict['NAME']}<br>
-Host: {connection.settings_dict['HOST']}<br>
-Restaurants: {Restaurant.objects.count()}
-"""
-    )
+    query = request.GET.get('q')
+
+    if query:
+        restaurants = (
+            Restaurant.objects.filter(name__icontains=query)
+            | Restaurant.objects.filter(location__icontains=query)
+            | Restaurant.objects.filter(cuisine__icontains=query)
+        )
+    else:
+        restaurants = Restaurant.objects.all()
+
+    print("Restaurant Count:", restaurants.count())
+
+    return render(request, "home.html", {
+        "restaurants": restaurants
+    })
 
 
 # 🍽️ RESTAURANT DETAIL PAGE

@@ -33,9 +33,11 @@ from .serializers import RestaurantSerializer
 
 #     })
 from django.http import HttpResponse
+from .models import Restaurant
 
 def home(request):
-    return HttpResponse("Home works")
+    restaurants = Restaurant.objects.all()
+    return HttpResponse(f"Restaurants: {restaurants.count()}")
 
 
 # 🍽️ RESTAURANT DETAIL PAGE

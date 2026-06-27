@@ -32,15 +32,12 @@ from .serializers import RestaurantSerializer
 #         'restaurants': restaurants
 
 #     })
-from django.http import HttpResponse
-from .models import Restaurant
+from django.shortcuts import render
 
 def home(request):
-    try:
-        restaurants = Restaurant.objects.all()
-        return HttpResponse(f"Restaurants: {restaurants.count()}")
-    except Exception as e:
-        return HttpResponse(str(e))
+    return render(request, "home.html", {
+        "restaurants": []
+    })
 
 
 # 🍽️ RESTAURANT DETAIL PAGE

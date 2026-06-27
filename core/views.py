@@ -34,10 +34,18 @@ from .serializers import RestaurantSerializer
 #     })
 from django.shortcuts import render
 
+from django.http import HttpResponse
+from .models import Restaurant
+from django.db import connection
+
 def home(request):
-    return render(request, "home.html", {
-        "restaurants": []
-    })
+    return HttpResponse(
+        f"""
+Database: {connection.settings_dict['NAME']}<br>
+Host: {connection.settings_dict['HOST']}<br>
+Restaurants: {Restaurant.objects.count()}
+"""
+    )
 
 
 # 🍽️ RESTAURANT DETAIL PAGE

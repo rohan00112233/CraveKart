@@ -36,8 +36,11 @@ from django.http import HttpResponse
 from .models import Restaurant
 
 def home(request):
-    restaurants = Restaurant.objects.all()
-    return HttpResponse(f"Restaurants: {restaurants.count()}")
+    try:
+        restaurants = Restaurant.objects.all()
+        return HttpResponse(f"Restaurants: {restaurants.count()}")
+    except Exception as e:
+        return HttpResponse(str(e))
 
 
 # 🍽️ RESTAURANT DETAIL PAGE

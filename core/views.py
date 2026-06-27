@@ -9,29 +9,33 @@ from .serializers import RestaurantSerializer
 
 
 # 🏠 HOME PAGE
+# def home(request):
+
+#     query = request.GET.get('q')
+
+#     if query:
+
+#         restaurants = Restaurant.objects.filter(
+#             name__icontains=query
+#         ) | Restaurant.objects.filter(
+#             location__icontains=query
+#         ) | Restaurant.objects.filter(
+#             cuisine__icontains=query
+#         )
+
+#     else:
+
+#         restaurants = Restaurant.objects.all()
+
+#     return render(request, 'home.html', {
+
+#         'restaurants': restaurants
+
+#     })
+from django.http import HttpResponse
+
 def home(request):
-
-    query = request.GET.get('q')
-
-    if query:
-
-        restaurants = Restaurant.objects.filter(
-            name__icontains=query
-        ) | Restaurant.objects.filter(
-            location__icontains=query
-        ) | Restaurant.objects.filter(
-            cuisine__icontains=query
-        )
-
-    else:
-
-        restaurants = Restaurant.objects.all()
-
-    return render(request, 'home.html', {
-
-        'restaurants': restaurants
-
-    })
+    return HttpResponse("Home works")
 
 
 # 🍽️ RESTAURANT DETAIL PAGE
